@@ -1,0 +1,154 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<style>
+#condition{overflow: hidden; border-bottom: 1px solid black; padding-bottom:20px }
+#condition #left{float: left;}
+#condition #right{float: right;}
+#products {overflow: hidden;}
+#products .box{width: 200px; float: left;margin: 10px;padding: 10px}
+
+#products .box .name{font-size: 12px; width: 200px}
+#products .box img{border: 4px solid rgb(254, 203, 0); border-radius:20px} 
+
+#new {overflow: hidden; border: 1px solid #006AA7;}
+#new .box{width: 150px; float: left;margin: 10px;padding: 10px}
+
+
+</style>
+    
+    
+    
+<div id="condition">
+	<form name="frm" id="left">
+		<select id="key">
+			<option value="prod_name">상품명</option>
+			<option value="company">제조사</option>
+			<option value="mall_name">판매처</option>
+		</select>
+		<input type="text" id="word" placeholder="검색어">
+		<button>검색</button>
+		검색수 : <span id="total"></span>
+	</form>
+
+	<div id="right">
+		<select id="order">
+			<option value="prod_name">상품명</option>
+			<option value="price1">상품가격</option>
+		</select>
+		<select id="desc">
+			<option value="desc">내림차순</option>
+			<option value="asc">오름차순</option>
+		</select>
+	</div>
+</div>
+<div id="products"></div>
+<script id="ptemp" type="text/x-handlebars-template">
+	{{#each array}}
+		<div class="box">
+			<img src="/image/shop/{{image}}" width=200>
+			<div class="name ellipsis">{{prod_name}}</div>
+			<div class="price">{{fprice}}</div>
+			
+		</div>
+
+	{{/each}}
+</script>
+<div class="buttons">
+   <button id="prev">이전</button>
+   <span id="page">1/10</span>
+   <button id="next">다음</button>
+</div>
+
+
+<h2>최신상품</h2>
+<div id="new"></div>
+<script id="ntemp" type="text/x-handlebars-template">
+	{{#each array}}
+		<div class="box">
+			<img src="/image/shop/{{image}}" width=150>
+			<div class="name ellipsis">{{prod_name}}</div>
+			<div class="price">{{fprice}}</div>
+		</div>
+	{{/each}}
+</script>
+<script>
+
+var page=1;
+getProducts();
+getNew();
+
+$("#next").on("click", function(){
+    page++;
+    getProducts();
+ });
+ 
+ $("#prev").on("click", function(){
+    page--;
+    getProducts();
+ });
+
+$(frm).on("submit", function (e) {
+	e.preventDefault();
+	page=1;
+	getProducts();
+})
+
+$("#order, #desc").on("change", function(){
+	page=1;
+	getProducts();
+	
+})
+
+//최신상품목록
+function getNew() {
+	var key="prod_id";
+	var word=""
+	var per=5;
+	var order="prod_id";
+	var desc=$("#desc").val();
+	$.ajax({
+		type:"get",
+		url:"/pro/list.json",
+		data:{key:key, word:word, per:per, order:order, desc:desc, page:1},
+		dataType:"json",
+		success:function(data){
+			var temp=Handlebars.compile($("#ntemp").html());
+			$("#new").html(temp(data));
+		}
+	})
+}
+
+
+function getProducts() {
+	var key=$("#key").val();
+	var word=$("#word").val();
+	var per=8;
+	var order=$("#order").val();
+	var desc=$("#desc").val();
+	$.ajax({
+		type:"get",
+		url:"/pro/list.json",
+		data:{key:key, word:word, per:per, order:order, desc:desc, page:page},
+		dataType:"json",
+		success:function(data){
+			var temp=Handlebars.compile($("#ptemp").html());
+			$("#products").html(temp(data));
+			 $("#total").html(data.total);
+			 if(data.total==0){
+	               $("#products").append("<div style='text-align:center;padding-top: 30px; font-size:25px; color:red;'> 검색 상품이 존재하지 않습니다. <div>");
+	               $(".buttons").hide();
+			  }else{
+              $("#page").html(page + "/" + data.last);
+              
+              if(page==1) $("#prev").attr("disabled", true);
+              else $("#prev").attr("disabled", false);
+              
+              if(page==data.last) $("#next").attr("disabled", true);
+              else $("#next").attr("disabled", false);
+              $(".buttons").show();
+           }
+        }
+     })
+  }
+
+</script>

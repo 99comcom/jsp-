@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<h1>업체목록</h1>
+
+<div>
+	<form name="frm">
+		<select id="key">
+			<option value="mall_id">업체코드</option>
+			<option value="mall_name">업체이름</option>
+			<option value="address">업체주소</option>
+			<option value="tel">업체번호</option>
+		</select>
+	</form>
+
+</div>

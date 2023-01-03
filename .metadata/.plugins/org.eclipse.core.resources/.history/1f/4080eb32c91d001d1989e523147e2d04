@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<h1>업체목록</h1>
+
+<div>
+	<form name="frm">
+		<select id="key">
+			<option value="mall_id">업체코드</option>
+			<option value="mall_name">업체이름</option>
+			<option value="address">업체주소</option>
+			<option value="tel">업체번호</option>
+		</select>
+		<input type="text" id="word" placeholder="검색어">
+		<select id="per">
+			<option value="5">5행</option>
+			<option value="7">7행</option>
+			<option value="10">10행</option>
+			<option value="15">15행</option>
+		</select>
+		<button>검색</button>
+	</form>
+	<div>
+		<select id="order">
+			<option value="mall_id">업체코드</option>
+			<option value="mall_name">업체이름</option>
+			<option value="address">업체주소</option>
+			<option value="tel">업체번호</option>
+		</select>
+		<select id="desc">
+			<option value="asc">오름차순</option>
+			<option value="desc">내림차순</option>
+		</select>
+	
+	
+	</div>
+
+</div>

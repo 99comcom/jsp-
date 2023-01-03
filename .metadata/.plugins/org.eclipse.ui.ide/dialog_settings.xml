@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item key="WizardProjectsImportPage.STORE_NESTED_PROJECTS" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
+		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/woodindin/Downloads/data/jsp/education (1)"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/education"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex07_1"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex06_1"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex05_1"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex03_1"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex02_1"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex01"/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex01_1"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+			<item value="/Users/woodindin/Downloads/data/jsp/ex01_11/src/main/webapp/list.jsp"/>
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
+		<item key="ResourceWorkingSetFilter.STORE_WORKING_SET" value="Aggregate for window 1659333013961"/>
+	</section>
+</section>

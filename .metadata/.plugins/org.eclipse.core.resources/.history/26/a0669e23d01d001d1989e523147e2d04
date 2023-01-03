@@ -1,0 +1,139 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Pyenong;
+}
+
+@font-face {
+    font-family: Pyenong;
+    src: url("111.ttf");
+}
+
+body {
+
+    width:960px;
+    margin:0px auto
+}
+#top{
+	text-align: center;
+}
+
+#menu {
+    margin:20px 0px;
+    border-top: 1px dotted gray;
+    border-bottom: 1px dotted gray;
+    padding:20px 0px;
+    background: #006AA7;
+
+
+}
+
+#menu .item {
+    padding:0px 20px;
+}
+
+#menu .item a {
+    text-decoration: none;
+    color: rgb(255,255,255);
+}
+
+#menu .item a:hover{
+    font-weight: bold;
+    color: rgb(254, 203, 0);
+}
+
+#bottom {
+    text-align: center;
+    margin:20px 0px;
+    border-top:5px solid gray;
+    padding:20px 0px;
+}
+
+#middle {
+    margin:30px 0px;
+}
+
+h1 {
+	 margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0px auto;
+    margin-top: 30px;
+}
+
+td {
+    padding:10px 10px;
+    border-bottom: 1px solid gray;
+}
+
+table .title {
+	 background: #006AA7;
+    color: white;
+    text-align: center;
+}
+
+table .row:hover {
+    background:rgb(254, 203, 0);
+    cursor: pointer;
+}
+table .row td{
+	 text-align: center;
+}
+
+button {
+    padding: 10px 25px;
+    background:#006AA7;
+    color: white;
+    border-radius: 5px;
+    border:none;
+    cursor: pointer;
+    font-family: namsan;
+}
+
+button:disabled {
+    background: gray;
+}
+
+input[type="text"], input[type="password"], select{
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: Pyenong;
+}
+
+textarea{
+    font-family: Pyenong;
+    border-radius: 5px;
+    padding: 5px;
+}
+.readonly {
+    color: gray;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 15px
+}
+
+#sell{
+	text-align: center;
+    margin-top: 15px;
+}
+    #condition {overflow:hidden;}
+	#condition #save {float:left;}
+	#condition form {float:right;}
+
+.ellipsis {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }

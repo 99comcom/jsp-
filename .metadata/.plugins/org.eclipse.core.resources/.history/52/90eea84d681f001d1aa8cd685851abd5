@@ -1,0 +1,233 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<style>
+	#condition{overflow: hidden;}
+	#condition form{float: left;}
+	#condition #right{float: right;}
+	#condition button {padding: 5px 10px;}
+	#tbl1 table {border: 2px solid gray; padding: 10px}
+	
+</style>
+<h1>주문목록</h1>
+<div id="condition">
+	<form name="frm">
+		<select id="key">
+			<option value="order_id">주문번호</option>
+			<option value="name" selected>주문자명</option>
+			<option value="pdate">주문일</option>
+			<option value="address">주문자주소</option>
+			<option value="tel">주문자번호</option>
+		</select>
+		<input type="text" id="word" placeholder="검색어">
+		<select id="per">
+			<option value="2"selected>2행</option>
+			<option value="7">7행</option>
+			<option value="10" >10행</option>
+			<option value="15">15행</option>
+		</select>
+		<button>검색</button>검색수:<span id="total"></span>
+	</form>
+	<div id="right">
+		<select id="order">
+			<option value="order_id">주문번호</option>
+			<option value="name">주문자명</option>
+			<option value="pdate">주문일</option>
+			<option value="address">주문자주소</option>
+			<option value="tel">주문자번호</option>
+		</select>
+		<select id="desc">
+			<option value="asc">오름차순</option>
+			<option value="desc" selected>내림차순</option>
+		</select>
+	</div>
+</div>
+<table id="tbl"></table>
+<script id="temp" type="text/x-handlebars-template">
+   <tr class="title">
+      <td width=100>주문번호</td>
+      <td width=200>주문자명</td>
+      <td width=500>주소</td>
+      <td width=200>번호</td>
+	  <td width=200>주문일</td>
+      <td width=200>구매정보</td>
+   </tr>
+   {{#each array}}
+   <tr class="row">
+      <td>{{order_id}}</td>
+      <td>{{name}}</td>
+      <td>{{address}}</td>
+      <td>{{tel}}</td>
+		<td>{{pdate}}</td>
+      <td><button id="{{order_id}}">정보</button></td>
+   </tr>
+   {{/each}}
+</script>
+<div class="buttons">
+   <button id="prev">이전</button>
+   <span id="page">1/10</span>
+   <button id="next">다음</button>
+</div>
+
+<!--구매자정보-->
+
+<div id="tbl1"></div>
+<script id="temp1" type="text/x-handlebars-template">
+<h2>구매자정보</h2>
+ <table>
+	<tr>
+		<td class="title" width=150>구매자이름</td>
+		<td width=100>{{pur.name}} / {{pur.order_id}}</td>
+		<td class="title" width=100>전화</td>
+		<td width=200>{{pur.tel}}</td>
+		<td class="title" width=100>이메일</td>
+		<td width=100>{{pur.email}}</td>
+		<td class="title" width=100>주문일</td>
+		<td width=300>{{pur.pdate}}</td>
+	</tr>
+	<tr>
+		<td class="title" width=100>주소</td>
+		<td colspan=3>{{pur.address}}</td>
+		<td class="title" w>결재</td>
+		<td width=100>{{outPayType pur.payType}}</td>
+		<td class="title" >주문일</td>
+		<td width=100>
+
+ <select id="status">
+        <option value="0">처리중</option>
+        <option value="1">처리완료</option>
+        
+</select>
+
+   <button>수정<button>
+
+
+
+
+	</tr>
+</table>
+<table>
+	<tr class="title">
+		<td width=100>이미지</td>	
+		<td width=100>상품코드</td>	
+ 		<td width=300>상품명</td>
+		<td width=100>제조사</td>
+		<td width=100>가격</td>
+		<td width=100>수량</td>
+		<td width=100>금액</td>
+	</tr>
+	{{#each array}}
+	<tr class="row">
+		<td>
+			<a href="/pro/info?prod_id={{prod_id}}"><img src="/image/shop/{{image}}" width=50></a>
+		</td>
+		<td>{{prod_id}}</td>
+		<td>{{prod_name}}</td>
+		<td>{{company}}</td>
+		<td>{{price}}</td>
+		<td>{{qnt}}</td>
+		<td>{{sum}}</td>
+	</tr>
+	{{/each}}
+	<tr class="title">
+		<td colspan=7>합계: <b>{{total}}</b></td>
+	</tr>
+</table>
+</script>
+
+<script>
+	Handlebars.registerHelper("outPayType", function(payType){
+		if(payType=='0')	return "무통장";
+		else return "카드";
+	})
+
+	Handlebars.registerHelper("outStatus", function(status){
+		if(payType=='0')	return "무통장";
+		else return "카드";
+	})
+	
+	
+</script>
+
+<script>
+	var page=1;
+	getList();
+	   
+	   $("#next").on("click", function(){
+	      page++;
+	      getList();
+	   });
+	   
+	   $("#prev").on("click", function(){
+	      page--;
+	      getList();
+	   });
+	
+	$(frm).on("submit",function(e){
+		e.preventDefault();
+		page=1;
+		getList();
+		
+	})
+	
+	
+	//구매정보를눌렀을떄 
+	$("#tbl").on("click",".row button",function(){
+		var id=$(this).attr("id");
+		$.ajax({
+			type:"get",
+			url:"/order/read.json",
+			data:{id:id},
+			dataType:"json",
+			success:function(data){
+				 var temp=Handlebars.compile($("#temp1").html());
+		         $("#tbl1").html(temp(data));
+			}
+		})
+	})
+	
+	
+	
+	$("#per,#order,#desc").on("change",function(){
+		getList();
+	})
+	function getList() {
+		var key=$("#key").val();
+		var word=$("#word").val();
+		var per=$("#per").val();
+		var order=$("#order").val();
+		var desc=$("#desc").val();
+		
+		$.ajax({
+			type:"get",
+			url:"/order/list.json",
+			data:{key:key,word:word,per:per,order:order,desc:desc, page:page},
+			dataType:"json",
+			success:function(data){
+				 var temp=Handlebars.compile($("#temp").html());
+		         $("#tbl").html(temp(data));
+		         $("#total").html(data.total);
+		            if(data.total==0){
+		               $("#tbl").append("<tr><td colspan=6 class='none'>검색된 주문내역이 없습니다!</td></tr>");
+		               $(".buttons").hide();
+		            }else{
+		               $("#page").html(page + "/" + data.last);
+		               
+		               if(page==1) $("#prev").attr("disabled", true);
+		               else $("#prev").attr("disabled", false);
+		               
+		               if(page==data.last) $("#next").attr("disabled", true);
+		               else $("#next").attr("disabled", false);
+		               $(".buttons").show();
+		            }
+		         }
+		      })
+		   }
+	
+	
+	$.ajax({
+		type:"get",
+		url:"/order/list.json"
+	})
+
+</script>

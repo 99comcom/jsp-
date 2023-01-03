@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <html dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Shopping Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+  </head>
+  <body1>
+    <div class="wrapper">
+      <div class="title1">Login</div>
+      <form action="#">
+        <div class="field">
+          <input type="text" required>
+          <label>Email Address</label>
+        </div>
+        <div class="field">
+          <input type="password" required>
+          <label>Password</label>
+        </div>
+        <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">비밀번호기억</label>
+          </div>
+          <div class="pass-link"><a href="#">패스워드 찾기</a></div>
+        </div>
+        <div class="field">
+          <input type="submit" value="Login">
+        </div>
+        <div class="signup-link">회원이 아니신가요? <a href="#">회원가입</a></div>
+      </form>
+    </div>
+
+  </body1>
+</html>
+    
+    
+    
+<!-- <form name="frm">
+	<table>
+		<tr>
+			<td colspan="2"><h2>로그인</h2></td>
+		</tr>
+		
+		<tr>
+			<td>아이디</td> 
+			<td><input type="text" name="uid"></td>
+		</tr>
+
+		
+		<tr>
+			<td>비밀번호</td> 
+			<td><input type="password" name="pass"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><button style="width: 100%"> 로그인</button></td>
+		</tr>
+	
+	</table>
+
+
+</form> -->

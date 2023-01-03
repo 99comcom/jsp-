@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <style>
+	form td{border: 1px solid gray;}
+</style>
+
+<h1>상품등록</h1>
+<form name="frm" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td class="title" width="100">상품코드</td>
+			<td width="100"><input type="text" name="prod_id" size=7></td>
+			<td class="title" width="100">제조사</td>
+			<td width="200"><input type="text" name="company" size=20></td>
+		</tr>
+	
+	
+	
+	</table>
+</form>
